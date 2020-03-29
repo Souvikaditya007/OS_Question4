@@ -1,0 +1,120 @@
+#include<stdio.h>
+#include<string.h>
+#include<conio.h>
+void main()
+{
+   char p1[10][5],tem[5];
+    int i,j,p2[10],w1[10],totw1=0,p3[10],tem1,n;
+    float avgw1;
+    printf("enter no of processes:");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        printf("enter process%d name:",i+1);
+        scanf("%s",&p1[i]);
+        printf("enter process time:");
+        scanf("%d",&p2[i]);
+        printf("enter priority:");
+        scanf("%d",&p3[i]);
+    }
+    for(i=0;i<n-1;i++)
+    {
+        for(j=i+1;j<n;j++)
+        {
+            if(p3[i]>p3[j])
+            {
+                temp1=p3[i];
+                p3[i]=p3[j];
+                p3[j]=tem1;
+                tem1=p2[i];
+                p2[i]=p2[j];
+                p2[j]=tem1;
+                strcpy(tem,p1[i]);
+                strcpy(p1[i],p1[j]);
+                strcpy(p1[j],temp);
+            }
+        }
+    }
+    w1[0]=0;
+    for(i=1;i<n;i++)
+    {
+        w1[i]=w1[i-1]+w1[i-1];
+        totw1=totw1+w1[i];
+    }
+    avgw1=(float)totwt1/n;
+    printf("p_name\t p_time\t priority\t w_time\n");
+    for(i=0;i<n;i++)
+    {
+       printf(" %s\t %d\t %d\t %d\n" ,p1[i],p2[i],p3[i],w1[i]);
+    }
+    printf("total waiting time=%d\n avg waiting time=%f",totw1,avgw1);
+   
+    int t1,pd1[10],nd[10],w2[10],ta1[10],i1,j1,n2,n1;
+    int b1[10],fg[10],tta1=0,tw1=0;
+    float aw1,ata1;
+    printf("\nEnter the number of Processors \n");
+    scanf("%d",&n);
+    n1=n;
+    printf("\n Enter the Timeslice \n");
+    scanf("%d",&t1);
+    for(i=1;i<=n;i++)
+    {
+        printf("\n Enter the process ID %d",i);
+        scanf("%d",&pd1[i]);
+        printf("\n Enter the Burst Time for the process");
+        scanf("%d",&b1[i]);
+        nd[i]=b1[i];
+    }
+    for(i=1;i<=n;i++)
+    {
+        fg[i]=1;
+        w1[i]=0;
+    }
+    while(n!=0)
+    {
+        for(i=1;i<=n;i++)
+        {
+            if(nd[i]>=t1)
+            {
+                for(j=1;j<=n;j++)
+                {
+                    if((i!=j)&&(fg[i]==1)&&(nd[j]!=0))
+                    w1[j]+=t1;
+                }
+                nd[i]-=t1;
+                if(nd[i]==0)
+                {
+                    fg[i]=0;
+                    n--;
+                }
+            }
+            else
+            {
+                for(j=1;j<=n;j++)
+                {
+                    if((i!=j)&&(fg[i]==1)&&(nd[j]!=0))
+                    w1[j]+=nd[i];
+                }
+                nd[i]=0;
+                n--;
+                fg[i]=0;
+            }
+        }
+    }
+    for(i=1;i<=n1;i++)
+    {
+        ta1[i]=w1[i]+bt[i];
+        tw1=tw1+w1[i];
+       tta1=tta1+ta1[i];
+    }
+    aw1=(float)tw1/n1;
+    ata1=(float)tta1/n1;
+    printf("\n\n Process \t Process ID  \t BurstTime \t Waiting Time \t TurnaroundTime \n ");
+    for(i=1;i<=n1;i++)
+    {
+        printf("\n %5d \t %5d \t\t %5d \t\t %5d \t\t %5d \n", i,pd1[i],b1[i],w1[i],ta1[i]);
+    }
+    printf("\n The average Waiting Time=4.2f",aw1);
+    printf("\n The average Turn around Time=4.2f",ata1);
+}
+
